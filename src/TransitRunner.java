@@ -37,7 +37,7 @@ public class TransitRunner {
             // display output
             System.out.println("b:" + currentBus.getBusID() + "->s:" + nextStop.getStopID() +
                     "@" + arrivalTime + "//p:" + currentBus.getPassengersRiding().size() +
-                    "/f:" + currentBus.getCurrentFuel());
+                    "/f:" + 0); // will display actual currentBus.getCurrentFuel() in future version
 
             // move bus
             currentBus.moveToNextStop();
@@ -127,10 +127,10 @@ public class TransitRunner {
                 allEvents.add(newEvent);
             }
         }
-        System.out.println(allRoutes);
-        System.out.println(allStops);
-        System.out.println(allBuses);
-        System.out.println(allEvents);
+        //System.out.println(allRoutes);
+        //System.out.println(allStops);
+        //System.out.println(allBuses);
+        //System.out.println(allEvents);
     }
 
 }
