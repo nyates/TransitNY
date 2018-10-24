@@ -98,24 +98,30 @@ public class Bus {
     }
 
     public void moveToNextStop() {
+        currentFuel -= getDistanceToNextStop();
         currentLocationIndex = (currentLocationIndex + 1) % busRoute.getRouteLength();
         allowPassengersOff();
         allowPassengersOn();
     }
 
-    private Stop getNextStop() {
+    public Stop getNextStop() {
         int nextIndex = (currentLocationIndex + 1) % busRoute.getRouteLength();
         Stop nextStop = busRoute.getRouteStops().get(nextIndex);
         return nextStop;
     }
 
-    private int getTimeToNextStop() {
+    public int getDistanceToNextStop() {
         Stop currentStop = busRoute.getRouteStops().get(currentLocationIndex);
         Stop nextStop = getNextStop();
         double delta_x = currentStop.getLongitude() - nextStop.getLongitude();
         double delta_y = currentStop.getLatitude() - nextStop.getLatitude();
-        double distance = Math.sqrt(delta_x*delta_x + delta_y*delta_y);
-        int time = (int) (distance / speed);
+        int distance = (int) (70 * Math.sqrt(delta_x*delta_x + delta_y*delta_y));
+        return distance;
+    }
+
+    public int getTimeToNextStop() {
+        int distance = getDistanceToNextStop();
+        int time = 1 + (int) (60 * distance / speed);
         return time;
     }
 
